@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - UrbanThreads{% endblock %}
+
+{% block content %}
+
+<div style="padding: 80px 0; background: #fff;">
+    <!-- BREADCRUMB -->
+    <div class="container mb-4" data-aos="fade-down">
+        <nav style="font-size: 11px; letter-spacing: 2px;">
+            <a href="{% url 'home' %}" style="color: #666; text-decoration: none; text-transform: uppercase;">Home</a>
+            <span style="color: #D4AF37; margin: 0 10px;">/</span>
+            <a href="{% url 'product_list' %}" style="color: #666; text-decoration: none; text-transform: uppercase;">Products</a>
+            <span style="color: #D4AF37; margin: 0 10px;">/</span>
+            <a href="{% url 'category_products' product.category.slug %}" style="color: #666; text-decoration: none; text-transform: uppercase;">{{ product.category.name }}</a>
+            <span style="color: #D4AF37; margin: 0 10px;">/</span>
+            <span style="color: #000; text-transform: uppercase;">{{ product.name }}</span>
+        </nav>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <!-- PRODUCT IMAGE -->
+            <div class="col-md-6" data-aos="fade-right">
+                <div class="position-relative">
+                    {% if product.is_on_sale %}
+                        <span class="luxury-badge">Sale</span>
+                    {% elif product.is_featured %}
+                        <span class="luxury-badge" style="background: linear-gradient(135deg, #000, #1a1a1a); color: #D4AF37;">Featured</span>
+                    {% endif %}
+                    
+                    <div class="zoom-container" style="border: 2px solid #D4AF37; padding: 20px;">
+                        <img src="{{ product.get_photo_url }}" alt="{{ product.name }}" 
+                             style="width: 100%; display: block; filter: grayscale(15%);"
+                             onmouseover="this.style.filter='grayscale(0%)'; this.style.transform='scale(1.1)'"
+                             onmouseout="this.style.filter='grayscale(15%)'; this.style.transform='scale(1)'">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PRODUCT DETAILS -->
+            <div class="col-md-6" data-aos="fade-left">
+                <p style="color: #D4AF37; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px;">
+                    {{ product.category.name }}
+                </p>
+                
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; line-height: 1.3;">
+                    {{ product.name }}
+                </h1>
+                
+                <div style="margin-bottom: 40px;">
+                    {% if product.is_on_sale %}
+                        <span style="text-decoration: line-through; color: #999; font-size: 1.5rem; margin-right: 15px;">₹{{ product.price }}</span>
+                        <span class="luxury-price" style="font-size: 3rem;">₹{{ product.discount_price }}</span>
+                        <span style="background: #D4AF37; color: #000; padding: 5px 15px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-left: 15px; font-weight: 700;">
+                            Save ₹{{ product.price|floatformat:0|add:"-"|add:product.discount_price|floatformat:0 }}
+                        </span>
+                    {% else %}
+                        <span class="luxury-price" style="font-size: 3rem;">₹{{ product.price }}</span>
+                    {% endif %}
+                </div>
+                
+                <div style="border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 30px 0; margin-bottom: 40px;">
+                    <p style="color: #666; font-size: 14px; line-height: 2; letter-spacing: 1px;">
+                        {{ product.description }}
+                    </p>
+                </div>
+                
+                <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    
+                    {% if product.sizes %}
+                    <div style="margin-bottom: 30px;">
+                        <label style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #000; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">
+                            Select Size
+                        </label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            {% for size in product.get_sizes_list %}
+                            <label style="cursor: pointer;">
+                                <input type="radio" name="size" value="{{ size }}" required style="display: none;" onchange="this.parentElement.querySelector('.size-box').style.background='#D4AF37'; this.parentElement.querySelector('.size-box').style.color='#000'; document.querySelectorAll('.size-box').forEach(box => { if(box !== this.parentElement.querySelector('.size-box')) { box.style.background='transparent'; box.style.color='#000'; } })">
+                                <div class="size-box" style="border: 1px solid #D4AF37; padding: 15px 25px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; text-align: center; min-width: 70px;">
+                                    {{ size }}
+                                </div>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.colors %}
+                    <div style="margin-bottom: 30px;">
+                        <label style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #000; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">
+                            Select Color
+                        </label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            {% for color in product.get_colors_list %}
+                            <label style="cursor: pointer;">
+                                <input type="radio" name="color" value="{{ color }}" required style="display: none;" onchange="this.parentElement.querySelector('.color-box').style.background='#D4AF37'; this.parentElement.querySelector('.color-box').style.color='#000'; document.querySelectorAll('.color-box').forEach(box => { if(box !== this.parentElement.querySelector('.color-box')) { box.style.background='transparent'; box.style.color='#000'; } })">
+                                <div class="color-box" style="border: 1px solid #D4AF37; padding: 15px 25px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; text-align: center; min-width: 100px;">
+                                    {{ color }}
+                                </div>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div style="margin-bottom: 30px;">
+                        <label style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #000; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">
+                            Quantity
+                        </label>
+                        <input type="number" name="quantity" value="1" min="1" max="{{ product.quantity }}" 
+                               style="border: 1px solid #D4AF37; padding: 15px 20px; font-size: 14px; width: 100px; background: transparent; color: #000;">
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        {% if product.quantity > 0 %}
+                            <p style="color: #48bb78; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">
+                                <i class="fas fa-check-circle me-2"></i>In Stock ({{ product.quantity }} available)
+                            </p>
+                        {% else %}
+                            <p style="color: #f56565; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">
+                                <i class="fas fa-times-circle me-2"></i>Out of Stock
+                            </p>
+                        {% endif %}
+                    </div>
+                    
+                    {% if product.quantity > 0 %}
+                        <button type="submit" class="btn-luxury" style="width: 100%; padding: 20px;">
+                            <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn-luxury" disabled style="width: 100%; padding: 20px; opacity: 0.5; cursor: not-allowed;">
+                            Out of Stock
+                        </button>
+                    {% endif %}
+                </form>
+                
+                <!-- FEATURES -->
+                <div style="margin-top: 50px; padding-top: 40px; border-top: 1px solid rgba(212, 175, 55, 0.3);">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <i class="fas fa-shipping-fast" style="color: #D4AF37; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0;">Free Shipping</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <i class="fas fa-undo" style="color: #D4AF37; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0;">Easy Returns</p>
+                        </div>
+                        <div class="col-6">
+                            <i class="fas fa-shield-alt" style="color: #D4AF37; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0;">Secure Payment</p>
+                        </div>
+                        <div class="col-6">
+                            <i class="fas fa-headset" style="color: #D4AF37; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0;">24/7 Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RELATED PRODUCTS -->
+{% if related_products %}
+<div style="background: #000; padding: 100px 0; margin-top: 100px;">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">You May Also Like</p>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #F5F5DC;">
+                Related Products
+            </h2>
+        </div>
+        
+        <div class="row g-4">
+            {% for related in related_products|slice:":4" %}
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:50 }}">
+                <div class="luxury-card position-relative">
+                    <div class="zoom-container">
+                        <a href="{% url 'product_detail' related.slug %}">
+                            <img src="{{ related.get_photo_url }}" class="luxury-card-img" alt="{{ related.name }}">
+                        </a>
+                    </div>
+                    
+                    <div style="padding: 25px; text-align: center;">
+                        <h5 style="font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; color: #000; margin-bottom: 15px; min-height: 50px; display: flex; align-items: center; justify-content: center;">
+                            {{ related.name }}
+                        </h5>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <span class="luxury-price" style="font-size: 1.5rem;">₹{{ related.final_price }}</span>
+                        </div>
+                        
+                        <a href="{% url 'product_detail' related.slug %}" class="btn-luxury-outline">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

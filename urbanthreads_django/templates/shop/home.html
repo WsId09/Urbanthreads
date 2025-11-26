@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+
+{% block title %}UrbanThreads - Luxury Fashion Experience{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION WITH VIDEO EFFECT -->
+<section style="min-height: 100vh; background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); position: relative; display: flex; align-items: center; overflow: hidden;">
+    
+    <!-- Animated Pattern -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle, rgba(212, 175, 55, 0.05) 1px, transparent 1px); background-size: 50px 50px; animation: patternMove 30s linear infinite; opacity: 0.5;"></div>
+    
+    <!-- Floating Elements -->
+    <div class="float-element" style="position: absolute; top: 20%; left: 10%; width: 150px; height: 150px; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 50%; animation-delay: 0s;"></div>
+    <div class="float-element" style="position: absolute; bottom: 20%; right: 10%; width: 100px; height: 100px; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 50%; animation-delay: 2s;"></div>
+    <div class="float-element" style="position: absolute; top: 50%; left: 80%; width: 80px; height: 80px; border: 1px solid rgba(212, 175, 55, 0.2); animation-delay: 1s;"></div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1200">
+                <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 25px; font-weight: 300;">
+                    Spring / Summer 2025
+                </p>
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 5.5rem; font-weight: 700; color: #F5F5DC; letter-spacing: 5px; line-height: 1.1; margin-bottom: 35px; text-transform: uppercase; text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);">
+                    Redefining<br><span style="background: linear-gradient(135deg, #D4AF37, #CD7F32); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Elegance</span>
+                </h1>
+                <p style="color: #F5F5DC; font-size: 15px; letter-spacing: 2px; line-height: 2.2; margin-bottom: 50px; opacity: 0.9; max-width: 500px;">
+                    Experience the epitome of luxury fashion. Handcrafted designs that celebrate individuality and timeless sophistication.
+                </p>
+                <div>
+                    <a href="{% url 'product_list' %}" class="btn-luxury me-3">
+                        <i class="fas fa-shopping-bag me-2"></i>Explore Collection
+                    </a>
+                    <a href="#featured" class="btn-luxury-outline">
+                        <i class="fas fa-arrow-down me-2"></i>Discover More
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <div class="zoom-container" style="border: 2px solid #D4AF37; padding: 20px; position: relative;">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800" alt="Luxury Fashion" 
+                         style="width: 100%; display: block; filter: grayscale(20%) contrast(1.1); transition: all 0.8s;"
+                         onmouseover="this.style.filter='grayscale(0%) contrast(1.2)'; this.style.transform='scale(1.05)'"
+                         onmouseout="this.style.filter='grayscale(20%) contrast(1.1)'; this.style.transform='scale(1)'">
+                    <div style="position: absolute; top: 30px; right: 30px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); padding: 20px; border: 1px solid #D4AF37;">
+                        <p style="color: #D4AF37; font-size: 10px; letter-spacing: 3px; margin: 0;">NEW ARRIVAL</p>
+                        <p style="color: #F5F5DC; font-size: 20px; font-family: 'Playfair Display', serif; margin: 10px 0 0 0;">Limited Edition</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS SECTION -->
+<section style="background: #000; padding: 80px 0; border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3);">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
+                <div class="counter" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #D4AF37; font-weight: 700;">50K+</div>
+                <p style="color: #F5F5DC; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px;">Happy Clients</p>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="counter" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #D4AF37; font-weight: 700;">500+</div>
+                <p style="color: #F5F5DC; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px;">Premium Products</p>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="counter" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #D4AF37; font-weight: 700;">100%</div>
+                <p style="color: #F5F5DC; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px;">Satisfaction</p>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="counter" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #D4AF37; font-weight: 700;">24/7</div>
+                <p style="color: #F5F5DC; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px;">Support</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="luxury-divider"></div>
+
+<!-- CATEGORIES SECTION -->
+<section class="container my-5 py-5" id="categories">
+    <div class="text-center mb-5" data-aos="fade-up">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">Curated Collections</p>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #000; margin-bottom: 20px;">
+            Explore By Category
+        </h2>
+        <p style="color: #666; font-size: 13px; letter-spacing: 2px; max-width: 600px; margin: 0 auto;">
+            Discover our meticulously curated collections, designed for those who appreciate the finest in fashion
+        </p>
+    </div>
+    
+    <div class="row g-4">
+        {% for category in categories %}
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+            <a href="{% url 'category_products' category.slug %}" style="text-decoration: none;">
+                <div class="luxury-card">
+                    <div class="zoom-container">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" class="luxury-card-img" alt="{{ category.name }}">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600" class="luxury-card-img" alt="{{ category.name }}">
+                        {% endif %}
+                    </div>
+                    <div style="padding: 35px; text-align: center;">
+                        <h5 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; letter-spacing: 3px; text-transform: uppercase; color: #000; margin-bottom: 18px;">
+                            {{ category.name }}
+                        </h5>
+                        <p style="color: #666; font-size: 12px; letter-spacing: 1px; line-height: 2; margin-bottom: 25px;">
+                            {{ category.description|truncatewords:12 }}
+                        </p>
+                        <span style="color: #D4AF37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">
+                            Explore <i class="fas fa-arrow-right ms-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #999; font-size: 12px; letter-spacing: 2px;">No categories available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<div class="luxury-divider"></div>
+
+<!-- FEATURED PRODUCTS -->
+<section class="container my-5 py-5" id="featured">
+    <div class="text-center mb-5" data-aos="fade-up">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">Exclusive Selection</p>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #000; margin-bottom: 20px;">
+            Featured Collection
+        </h2>
+        <p style="color: #666; font-size: 13px; letter-spacing: 2px; max-width: 600px; margin: 0 auto;">
+            Handpicked pieces that define luxury and sophistication
+        </p>
+    </div>
+    
+    <div class="row g-4">
+        {% for product in featured_products %}
+        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:100 }}">
+            <div class="luxury-card position-relative">
+                {% if product.is_on_sale %}
+                    <span class="luxury-badge">Sale</span>
+                {% elif product.is_featured %}
+                    <span class="luxury-badge" style="background: linear-gradient(135deg, #000, #1a1a1a); color: #D4AF37;">Featured</span>
+                {% endif %}
+                
+                <div class="zoom-container">
+                    <a href="{% url 'product_detail' product.slug %}">
+                        <img src="{{ product.get_photo_url }}" class="luxury-card-img" alt="{{ product.name }}">
+                    </a>
+                </div>
+                
+                <div style="padding: 30px; text-align: center;">
+                    <h5 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: #000; margin-bottom: 18px; min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                        {{ product.name }}
+                    </h5>
+                    
+                    <div style="margin-bottom: 25px;">
+                        {% if product.is_on_sale %}
+                            <span style="text-decoration: line-through; color: #999; font-size: 14px; margin-right: 10px;">₹{{ product.price }}</span>
+                            <span class="luxury-price" style="font-size: 1.8rem;">₹{{ product.discount_price }}</span>
+                        {% else %}
+                            <span class="luxury-price" style="font-size: 1.8rem;">₹{{ product.price }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <a href="{% url 'product_detail' product.slug %}" class="btn-luxury-outline">
+                        <i class="fas fa-eye me-2"></i>View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #999; font-size: 12px; letter-spacing: 2px;">No featured products available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<div class="luxury-divider"></div>
+
+<!-- NEW ARRIVALS -->
+<section class="container my-5 py-5">
+    <div class="text-center mb-5" data-aos="fade-up">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">Latest Drops</p>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #000; margin-bottom: 20px;">
+            New Arrivals
+        </h2>
+        <p style="color: #666; font-size: 13px; letter-spacing: 2px; max-width: 600px; margin: 0 auto;">
+            Fresh additions to elevate your wardrobe
+        </p>
+    </div>
+    
+    <div class="row g-4">
+        {% for product in new_arrivals %}
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:50 }}">
+            <div class="luxury-card position-relative">
+                <span class="luxury-badge" style="background: linear-gradient(135deg, #000, #1a1a1a); color: #D4AF37;">New</span>
+                
+                <div class="zoom-container">
+                    <a href="{% url 'product_detail' product.slug %}">
+                        <img src="{{ product.get_photo_url }}" class="luxury-card-img" alt="{{ product.name }}">
+                    </a>
+                </div>
+                
+                <div style="padding: 30px; text-align: center;">
+                    <h5 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: #000; margin-bottom: 18px; min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                        {{ product.name }}
+                    </h5>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <span class="luxury-price" style="font-size: 1.8rem;">₹{{ product.final_price }}</span>
+                    </div>
+                    
+                    <a href="{% url 'product_detail' product.slug %}" class="btn-luxury-outline">
+                        <i class="fas fa-eye me-2"></i>View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #999; font-size: 12px; letter-spacing: 2px;">No new arrivals yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- PARALLAX BANNER -->
+<section class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200'); min-height: 500px; display: flex; align-items: center; position: relative; margin-top: 100px;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+    <div class="container text-center" style="position: relative; z-index: 2;" data-aos="fade-up">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 25px;">Limited Time Offer</p>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 4rem; color: #F5F5DC; letter-spacing: 5px; margin-bottom: 30px; text-transform: uppercase; text-shadow: 0 0 30px rgba(0,0,0,0.5);">
+            Exclusive Sale
+        </h2>
+        <p style="color: #F5F5DC; font-size: 15px; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9;">
+            Up to 50% off on selected items
+        </p>
+        <a href="{% url 'product_list' %}" class="btn-luxury">
+            <i class="fas fa-shopping-bag me-2"></i>Shop Now
+        </a>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section style="background: #000; padding: 100px 0; margin-top: 100px;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
+                <div style="background: rgba(212, 175, 55, 0.05); padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s;" onmouseover="this.style.background='rgba(212, 175, 55, 0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.5)'" onmouseout="this.style.background='rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.2)'">
+                    <i class="fas fa-shipping-fast" style="font-size: 3.5rem; color: #D4AF37; margin-bottom: 25px;"></i>
+                    <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Free Shipping</h5>
+                    <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 2; letter-spacing: 1px;">
+                        Complimentary delivery on orders above ₹2000
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div style="background: rgba(212, 175, 55, 0.05); padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s;" onmouseover="this.style.background='rgba(212, 175, 55, 0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.5)'" onmouseout="this.style.background='rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.2)'">
+                    <i class="fas fa-shield-alt" style="font-size: 3.5rem; color: #D4AF37; margin-bottom: 25px;"></i>
+                    <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Secure Payment</h5>
+                    <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 2; letter-spacing: 1px;">
+                        Your transactions are 100% protected
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div style="background: rgba(212, 175, 55, 0.05); padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s;" onmouseover="this.style.background='rgba(212, 175, 55, 0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.5)'" onmouseout="this.style.background='rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.2)'">
+                    <i class="fas fa-undo-alt" style="font-size: 3.5rem; color: #D4AF37; margin-bottom: 25px;"></i>
+                    <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Easy Returns</h5>
+                    <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 2; letter-spacing: 1px;">
+                        30-day hassle-free return policy
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div style="background: rgba(212, 175, 55, 0.05); padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s;" onmouseover="this.style.background='rgba(212, 175, 55, 0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.5)'" onmouseout="this.style.background='rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.2)'">
+                    <i class="fas fa-headset" style="font-size: 3.5rem; color: #D4AF37; margin-bottom: 25px;"></i>
+                    <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; font-family: 'Playfair Display', serif;">24/7 Support</h5>
+                    <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 2; letter-spacing: 1px;">
+                        Dedicated customer service always available
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes patternMove {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(50px, 50px); }
+    }
+</style>
+
+{% endblock %}

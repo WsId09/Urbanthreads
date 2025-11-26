@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - UrbanThreads{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-container {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 100px 0;
+    }
+    
+    .auth-container::before {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: movePattern 30s linear infinite;
+    }
+    
+    @keyframes movePattern {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(50px, 50px); }
+    }
+    
+    .auth-card {
+        background: #000;
+        border: 2px solid #D4AF37;
+        border-radius: 0;
+        box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
+    .auth-header {
+        background: linear-gradient(135deg, #D4AF37 0%, #CD7F32 100%);
+        padding: 50px 40px;
+        text-align: center;
+        position: relative;
+    }
+    
+    .auth-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #000, transparent);
+    }
+    
+    .auth-header i {
+        font-size: 4rem;
+        color: #000;
+        margin-bottom: 20px;
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .auth-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #000;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    
+    .auth-header p {
+        color: rgba(0,0,0,0.7);
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .auth-body {
+        padding: 50px 40px;
+        background: #000;
+    }
+    
+    .form-group {
+        margin-bottom: 30px;
+        position: relative;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #D4AF37;
+        margin-bottom: 12px;
+        display: block;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .form-control {
+        border: 2px solid rgba(212, 175, 55, 0.3);
+        background: rgba(212, 175, 55, 0.05);
+        border-radius: 0;
+        padding: 15px 20px;
+        font-size: 15px;
+        color: #F5F5DC;
+        transition: all 0.3s;
+        width: 100%;
+    }
+    
+    .form-control::placeholder {
+        color: rgba(245, 245, 220, 0.5);
+    }
+    
+    .form-control:focus {
+        border-color: #D4AF37;
+        background: rgba(212, 175, 55, 0.1);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        outline: none;
+        color: #F5F5DC;
+    }
+    
+    .error-message {
+        background: rgba(245, 101, 101, 0.1);
+        border: 1px solid #f56565;
+        color: #f56565;
+        padding: 15px;
+        border-radius: 0;
+        margin-bottom: 25px;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+    
+    .features {
+        background: rgba(212, 175, 55, 0.05);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        padding: 25px;
+        margin-top: 30px;
+        border-radius: 0;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        color: #F5F5DC;
+    }
+    
+    .feature-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .feature-item i {
+        color: #D4AF37;
+        margin-right: 15px;
+        font-size: 20px;
+    }
+    
+    .feature-item span {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5" data-aos="fade-up">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <i class="fas fa-user-circle"></i>
+                        <h2>Welcome Back</h2>
+                        <p>Login to your account</p>
+                    </div>
+                    
+                    <div class="auth-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            {% if form.errors %}
+                                <div class="error-message">
+                                    <i class="fas fa-exclamation-circle me-2"></i>
+                                    Invalid username or password. Please try again.
+                                </div>
+                            {% endif %}
+                            
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="Enter your username" required autofocus>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                            </div>
+                            
+                            <button type="submit" class="btn-luxury" style="width: 100%; margin-top: 10px;">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </button>
+                            
+                            <div class="features">
+                                <div class="feature-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Secure & Protected</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>Easy Checkout Process</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-truck"></i>
+                                    <span>Fast Delivery Service</span>
+                                </div>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 30px;">
+                                <p style="color: #F5F5DC; font-size: 13px; letter-spacing: 1px;">
+                                    Don't have an account? 
+                                    <a href="{% url 'register' %}" style="color: #D4AF37; font-weight: 600; text-decoration: none; transition: all 0.3s;"
+                                       onmouseover="this.style.textDecoration='underline'"
+                                       onmouseout="this.style.textDecoration='none'">
+                                        Sign Up
+                                    </a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

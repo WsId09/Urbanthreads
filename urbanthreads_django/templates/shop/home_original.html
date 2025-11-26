@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - UrbanThreads{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4">New Season Collection</h1>
+                <p class="lead mb-4">Discover the latest trends in fashion. Premium quality clothing that defines your unique style.</p>
+                <a href="{% url 'product_list' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-shopping-bag me-2"></i>Shop Now
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" alt="Fashion" class="img-fluid rounded" style="box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="container my-5">
+    <h2 class="section-title text-center">Shop by Category</h2>
+    
+    <div class="row g-4">
+        {% for category in categories %}
+        <div class="col-md-4">
+            <a href="{% url 'category_products' category.slug %}" class="text-decoration-none">
+                <div class="card product-card h-100">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400" class="card-img-top" alt="{{ category.name }}">
+                    {% endif %}
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <p class="text-muted">{{ category.description|truncatewords:10 }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-muted">No categories available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="container my-5">
+    <h2 class="section-title text-center">Featured Products</h2>
+    
+    <div class="row g-4">
+        {% for product in featured_products %}
+        <div class="col-md-3">
+            <div class="card product-card h-100 position-relative">
+                {% if product.is_on_sale %}
+                    <span class="badge-sale">SALE</span>
+                {% endif %}
+                
+                <a href="{% url 'product_detail' product.slug %}">
+                    <img src="{{ product.get_photo_url }}" class="card-img-top" alt="{{ product.name }}">
+                </a>
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="text-muted small">{{ product.description|truncatewords:8 }}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            {% if product.is_on_sale %}
+                                <span class="text-muted text-decoration-line-through small">₹{{ product.price }}</span>
+                                <span class="text-primary fw-bold fs-5 ms-2">₹{{ product.discount_price }}</span>
+                            {% else %}
+                                <span class="text-primary fw-bold fs-5">₹{{ product.price }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary w-100 mt-3">
+                        <i class="fas fa-eye me-2"></i>View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-muted">No featured products available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- New Arrivals -->
+{% if new_arrivals %}
+<section class="container my-5">
+    <h2 class="section-title text-center">New Arrivals</h2>
+    
+    <div class="row g-4">
+        {% for product in new_arrivals %}
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                <span class="badge-featured">NEW</span>
+                
+                <a href="{% url 'product_detail' product.slug %}">
+                    <img src="{{ product.get_photo_url }}" class="card-img-top" alt="{{ product.name }}">
+                </a>
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="text-muted small">{{ product.description|truncatewords:8 }}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="text-primary fw-bold fs-5">₹{{ product.final_price }}</span>
+                    </div>
+                    
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary w-100 mt-3">
+                        <i class="fas fa-eye me-2"></i>View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Features Section -->
+<section class="container my-5">
+    <div class="row g-4 text-center">
+        <div class="col-md-3">
+            <div class="p-4">
+                <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
+                <h5>Free Shipping</h5>
+                <p class="text-muted">On orders above ₹2000</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-4">
+                <i class="fas fa-undo fa-3x text-primary mb-3"></i>
+                <h5>Easy Returns</h5>
+                <p class="text-muted">30 days return policy</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-4">
+                <i class="fas fa-lock fa-3x text-primary mb-3"></i>
+                <h5>Secure Payment</h5>
+                <p class="text-muted">100% secure transactions</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-4">
+                <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+                <h5>24/7 Support</h5>
+                <p class="text-muted">Dedicated customer service</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
