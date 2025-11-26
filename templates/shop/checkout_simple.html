@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - UrbanThreads{% endblock %}
+
+{% block content %}
+<div style="padding: 100px 0; background: #fff;">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-down">
+            <p style="color: #D4AF37; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">Complete Your Order</p>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; letter-spacing: 3px; text-transform: uppercase;">
+                Secure Checkout
+            </h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-7" data-aos="fade-right">
+                <div style="background: #fff; border: 1px solid rgba(212, 175, 55, 0.3); padding: 40px;">
+                    <h5 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #000; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px;">
+                        Shipping Information
+                    </h5>
+                    
+                    <form method="POST" id="checkoutForm" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">Full Name *</label>
+                            <input type="text" name="full_name" id="fullName" required minlength="3" pattern="[A-Za-z\s]+"
+                                   style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                   onfocus="this.style.borderColor='#D4AF37'"
+                                   onblur="this.style.borderColor='#ddd'">
+                            <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                Please enter your full name (minimum 3 characters, letters only).
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">Email *</label>
+                                <input type="email" name="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                       style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                       onfocus="this.style.borderColor='#D4AF37'"
+                                       onblur="this.style.borderColor='#ddd'">
+                                <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">Phone *</label>
+                                <input type="tel" name="phone" id="phone" required pattern="[0-9]{10}" maxlength="10"
+                                       style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                       onfocus="this.style.borderColor='#D4AF37'"
+                                       onblur="this.style.borderColor='#ddd'">
+                                <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                    Please enter a valid 10-digit phone number.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">Address *</label>
+                            <textarea name="address" id="address" rows="3" required minlength="10"
+                                      style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                      onfocus="this.style.borderColor='#D4AF37'"
+                                      onblur="this.style.borderColor='#ddd'"></textarea>
+                            <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                Please enter your complete address (minimum 10 characters).
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">City *</label>
+                                <input type="text" name="city" id="city" required minlength="2" pattern="[A-Za-z\s]+"
+                                       style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                       onfocus="this.style.borderColor='#D4AF37'"
+                                       onblur="this.style.borderColor='#ddd'">
+                                <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                    Please enter a valid city name.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">State *</label>
+                                <input type="text" name="state" id="state" required minlength="2" pattern="[A-Za-z\s]+"
+                                       style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                       onfocus="this.style.borderColor='#D4AF37'"
+                                       onblur="this.style.borderColor='#ddd'">
+                                <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                    Please enter a valid state name.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label style="color: #000; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 600;">Pincode *</label>
+                            <input type="text" name="pincode" id="pincode" required pattern="[0-9]{6}" maxlength="6"
+                                   style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-size: 14px; transition: all 0.3s;"
+                                   onfocus="this.style.borderColor='#D4AF37'"
+                                   onblur="this.style.borderColor='#ddd'">
+                            <div class="invalid-feedback" style="color: #c33; font-size: 12px; margin-top: 5px;">
+                                Please enter a valid 6-digit pincode.
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-luxury" style="width: 100%; margin-top: 20px;">
+                            <i class="fas fa-lock me-2"></i>Place Order Securely
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-md-5" data-aos="fade-left">
+                <div style="background: #000; border: 1px solid #D4AF37; padding: 40px; position: sticky; top: 100px;">
+                    <h5 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px;">
+                        Order Summary
+                    </h5>
+                    
+                    {% for item in cart_items %}
+                    <div style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 20px 0; display: flex; align-items: center;">
+                        <img src="{{ item.product.get_photo_url }}" alt="{{ item.product.name }}" 
+                             style="width: 70px; height: 70px; object-fit: cover; border: 1px solid #D4AF37; margin-right: 20px;">
+                        <div style="flex: 1;">
+                            <p style="color: #F5F5DC; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px;">
+                                {{ item.product.name }}
+                            </p>
+                            <p style="color: #999; font-size: 11px; margin-bottom: 5px;">
+                                Size: {{ item.size }} | Color: {{ item.color }}
+                            </p>
+                            <p style="color: #D4AF37; font-size: 14px; font-weight: 600;">
+                                ₹{{ item.product.final_price }} × {{ item.quantity }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(212, 175, 55, 0.3);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #F5F5DC; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">Subtotal</span>
+                            <span style="color: #F5F5DC; font-size: 14px; font-weight: 600;">₹{{ subtotal }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <span style="color: #F5F5DC; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">Shipping</span>
+                            <span style="color: {% if subtotal >= 2000 %}#48bb78{% else %}#F5F5DC{% endif %}; font-size: 14px; font-weight: 600;">
+                                {% if subtotal >= 2000 %}FREE{% else %}₹100{% endif %}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding-top: 20px; border-top: 2px solid #D4AF37;">
+                            <span style="color: #D4AF37; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;">Total</span>
+                            <span style="font-family: 'Playfair Display', serif; color: #D4AF37; font-size: 2rem; font-weight: 700;">
+                                ₹{{ total }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2);">
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <i class="fas fa-shield-alt" style="color: #D4AF37; font-size: 20px; margin-right: 15px;"></i>
+                            <p style="color: #F5F5DC; font-size: 11px; letter-spacing: 1px; margin: 0;">Secure Payment</p>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <i class="fas fa-truck" style="color: #D4AF37; font-size: 20px; margin-right: 15px;"></i>
+                            <p style="color: #F5F5DC; font-size: 11px; letter-spacing: 1px; margin: 0;">Fast Delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Form validation
+document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+    if (!this.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    this.classList.add('was-validated');
+});
+
+// Input filters
+document.getElementById('fullName').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+});
+
+document.getElementById('phone').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+document.getElementById('city').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+});
+
+document.getElementById('state').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+});
+
+document.getElementById('pincode').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+</script>
+{% endblock %}

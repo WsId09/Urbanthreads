@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - UrbanThreads{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="section-title mb-4">Checkout</h2>
+    
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Shipping Information</h5>
+                    
+                    <form method="POST" id="checkoutForm" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" name="full_name" id="fullName" class="form-control" required minlength="3" pattern="[A-Za-z\s]+" title="Please enter a valid name (letters only)">
+                                <div class="invalid-feedback">
+                                    Please enter your full name (minimum 3 characters, letters only).
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email *</label>
+                                <input type="email" name="email" id="email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone *</label>
+                                <input type="tel" name="phone" id="phone" class="form-control" required pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number">
+                                <div class="invalid-feedback">
+                                    Please enter a valid 10-digit phone number.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Address *</label>
+                            <textarea name="address" id="address" class="form-control" rows="3" required minlength="10" title="Please enter your complete address"></textarea>
+                            <div class="invalid-feedback">
+                                Please enter your complete address (minimum 10 characters).
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">City *</label>
+                                <input type="text" name="city" id="city" class="form-control" required minlength="2" pattern="[A-Za-z\s]+" title="Please enter a valid city name">
+                                <div class="invalid-feedback">
+                                    Please enter a valid city name.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">State *</label>
+                                <input type="text" name="state" id="state" class="form-control" required minlength="2" pattern="[A-Za-z\s]+" title="Please enter a valid state name">
+                                <div class="invalid-feedback">
+                                    Please enter a valid state name.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Pincode *</label>
+                                <input type="text" name="pincode" id="pincode" class="form-control" required pattern="[0-9]{6}" maxlength="6" title="Please enter a valid 6-digit pincode">
+                                <div class="invalid-feedback">
+                                    Please enter a valid 6-digit pincode.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">
+                            <i class="fas fa-check-circle me-2"></i>Place Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Order Summary</h5>
+                    
+                    {% for item in cart_items %}
+                    <div class="d-flex mb-3 pb-3 border-bottom">
+                        <img src="{{ item.product.get_photo_url }}" alt="{{ item.product.name }}" style="width: 60px; height: 60px; object-fit: cover;" class="rounded me-3">
+                        <div class="flex-grow-1">
+                            <p class="mb-1 fw-bold">{{ item.product.name }}</p>
+                            <p class="text-muted small mb-0">Qty: {{ item.quantity }}</p>
+                        </div>
+                        <p class="mb-0 fw-bold">₹{{ item.total_price }}</p>
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>₹{{ total }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping:</span>
+                        <span class="text-success">
+                            {% if total > 2000 %}
+                                FREE
+                            {% else %}
+                                ₹100
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong class="fs-5">Total:</strong>
+                        <strong class="text-primary fs-4">
+                            ₹{% if total > 2000 %}{{ total }}{% else %}{{ total|add:100 }}{% endif %}
+                        </strong>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <small>Your order will be processed within 24 hours</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Form validation
+(function() {
+    'use strict';
+    
+    // Fetch the form
+    var form = document.getElementById('checkoutForm');
+    
+    // Phone number validation
+    var phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    
+    // Pincode validation
+    var pincodeInput = document.getElementById('pincode');
+    pincodeInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    
+    // Name validation - only letters and spaces
+    var nameInput = document.getElementById('fullName');
+    nameInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+    });
+    
+    // City validation - only letters and spaces
+    var cityInput = document.getElementById('city');
+    cityInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+    });
+    
+    // State validation - only letters and spaces
+    var stateInput = document.getElementById('state');
+    stateInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+    });
+    
+    // Form submission validation
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        
+        form.classList.add('was-validated');
+    }, false);
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}UrbanThreads - Luxury Fashion{% endblock %}</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts - Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ULTIMATE LUXURY DESIGN ========== */
+        
+        /* Prevent horizontal scroll */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+        }
+        
+        * {
+            box-sizing: border-box !important;
+        }
+        
+        :root {
+            --luxury-black: #000000;
+            --luxury-gold: #D4AF37;
+            --luxury-cream: #F5F5DC;
+            --luxury-grey: #1a1a1a;
+            --luxury-white: #FFFFFF;
+            --luxury-silver: #C0C0C0;
+            --luxury-bronze: #CD7F32;
+            --luxury-champagne: #F7E7CE;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--luxury-white);
+            color: var(--luxury-black);
+            overflow-x: hidden;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+        
+        /* ========== CUSTOM CURSOR ========== */
+        
+        body {
+            cursor: none;
+        }
+        
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--luxury-gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+        
+        .custom-cursor-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--luxury-gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: all 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        a:hover ~ .custom-cursor,
+        button:hover ~ .custom-cursor {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        /* ========== PAGE LOADER ========== */
+        
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--luxury-black);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        
+        .page-loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--luxury-gold);
+            letter-spacing: 8px;
+            margin-bottom: 30px;
+            animation: logoFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--luxury-gold);
+            animation: loadBar 2s ease-in-out infinite;
+        }
+        
+        @keyframes loadBar {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* ========== LUXURY TYPOGRAPHY ========== */
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        /* ========== NAVIGATION ========== */
+        
+        .luxury-navbar {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .luxury-navbar.scrolled {
+            padding: 12px 0;
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .luxury-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--luxury-gold) !important;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .luxury-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--luxury-gold), var(--luxury-bronze));
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .luxury-brand:hover::after {
+            width: 100%;
+        }
+        
+        .luxury-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+        }
+        
+        .luxury-nav-link {
+            color: var(--luxury-cream) !important;
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 20px !important;
+            margin: 0 5px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .luxury-nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--luxury-gold);
+            transition: width 0.3s;
+        }
+        
+        .luxury-nav-link:hover {
+            color: var(--luxury-gold) !important;
+        }
+        
+        .luxury-nav-link:hover::before {
+            width: 70%;
+        }
+        
+        .luxury-cart-badge {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-bronze));
+            color: var(--luxury-black);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 6px;
+            border-radius: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+        }
+        
+        /* ========== GLASSMORPHISM CARD ========== */
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s;
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+        
+        /* ========== LUXURY PRODUCT CARDS ========== */
+        
+        .luxury-card {
+            background: var(--luxury-white);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.8s;
+            z-index: 1;
+        }
+        
+        .luxury-card:hover::before {
+            left: 100%;
+        }
+        
+        .luxury-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.2);
+            border-color: var(--luxury-gold);
+        }
+        
+        .luxury-card-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(30%) brightness(0.95);
+        }
+        
+        .luxury-card:hover .luxury-card-img {
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(1);
+        }
+        
+        /* ========== IMAGE ZOOM ON HOVER ========== */
+        
+        .zoom-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .zoom-container::after {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 3rem;
+            color: var(--luxury-gold);
+            transition: transform 0.3s;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .zoom-container:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* ========== LUXURY BADGE ========== */
+        
+        .luxury-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-bronze));
+            color: var(--luxury-black);
+            padding: 8px 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 3;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+            animation: badgeShine 3s infinite;
+        }
+        
+        @keyframes badgeShine {
+            0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
+        }
+        
+        /* ========== PREMIUM BUTTONS ========== */
+        
+        .btn-luxury {
+            background: linear-gradient(135deg, var(--luxury-black), var(--luxury-grey));
+            color: var(--luxury-gold);
+            border: 2px solid var(--luxury-gold);
+            padding: 15px 45px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 0;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-bronze));
+            transition: left 0.4s;
+            z-index: -1;
+        }
+        
+        .btn-luxury:hover {
+            color: var(--luxury-black);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-luxury:hover::before {
+            left: 0;
+        }
+        
+        .btn-luxury-outline {
+            background: transparent;
+            color: var(--luxury-gold);
+            border: 1px solid var(--luxury-gold);
+            padding: 12px 35px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-luxury-outline:hover {
+            background: var(--luxury-gold);
+            color: var(--luxury-black);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* ========== FLOATING ANIMATION ========== */
+        
+        .float-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(2deg); }
+            66% { transform: translateY(-10px) rotate(-2deg); }
+        }
+        
+        /* ========== PARALLAX EFFECT ========== */
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* ========== LUXURY PRICE ========== */
+        
+        .luxury-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-bronze));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+        
+        /* ========== BACK TO TOP ========== */
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-bronze));
+            color: var(--luxury-black);
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* ========== LUXURY DIVIDER ========== */
+        
+        .luxury-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--luxury-gold), transparent);
+            margin: 60px auto;
+            position: relative;
+        }
+        
+        .luxury-divider::before,
+        .luxury-divider::after {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--luxury-gold);
+            font-size: 8px;
+        }
+        
+        .luxury-divider::before {
+            left: -15px;
+        }
+        
+        .luxury-divider::after {
+            right: -15px;
+        }
+        
+        /* ========== LUXURY FOOTER ========== */
+        
+        .luxury-footer {
+            background: var(--luxury-black);
+            color: var(--luxury-cream);
+            padding: 100px 0 30px;
+            border-top: 1px solid var(--luxury-gold);
+            position: relative;
+        }
+        
+        .luxury-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--luxury-gold), transparent);
+        }
+        
+        .luxury-footer h5 {
+            color: var(--luxury-gold);
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .luxury-footer a {
+            color: var(--luxury-cream);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .luxury-footer a:hover {
+            color: var(--luxury-gold);
+            padding-left: 15px;
+        }
+        
+        /* ========== MODAL OVERLAY ========== */
+        
+        .modal-content {
+            background: var(--luxury-black);
+            border: 1px solid var(--luxury-gold);
+            border-radius: 0;
+            color: var(--luxury-cream);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .modal-footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        
+        @media (max-width: 768px) {
+            .luxury-brand {
+                font-size: 1.5rem;
+            }
+            
+            .luxury-nav-link {
+                font-size: 11px;
+                padding: 8px 15px !important;
+            }
+            
+            .luxury-card-img {
+                height: 300px;
+            }
+            
+            body {
+                cursor: auto;
+            }
+            
+            .custom-cursor,
+            .custom-cursor-dot {
+                display: none;
+            }
+        }
+        
+        /* ========== SELECTION STYLE ========== */
+        
+        ::selection {
+            background: var(--luxury-gold);
+            color: var(--luxury-black);
+        }
+        
+        ::-moz-selection {
+            background: var(--luxury-gold);
+            color: var(--luxury-black);
+        }
+        
+        /* ========== SCROLLBAR ========== */
+        
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--luxury-black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--luxury-gold), var(--luxury-bronze));
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--luxury-gold);
+        }
+        
+        /* ========== MOBILE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Extra Small Devices (phones, less than 576px) */
+        @media (max-width: 575.98px) {
+            body {
+                font-size: 14px !important;
+            }
+            
+            .container {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+            
+            .navbar {
+                padding: 10px 15px !important;
+            }
+            
+            .navbar-brand {
+                font-size: 20px !important;
+                letter-spacing: 2px !important;
+            }
+            
+            .nav-link {
+                font-size: 14px !important;
+                padding: 8px 10px !important;
+            }
+            
+            .hero-section {
+                height: 60vh !important;
+                padding: 30px 15px !important;
+            }
+            
+            .hero-section h1 {
+                font-size: 32px !important;
+                line-height: 1.2 !important;
+                letter-spacing: 2px !important;
+            }
+            
+            .hero-section p {
+                font-size: 14px !important;
+                margin: 15px 0 !important;
+            }
+            
+            .btn-luxury {
+                font-size: 12px !important;
+                padding: 12px 25px !important;
+                letter-spacing: 1px !important;
+            }
+            
+            .product-card img {
+                height: 250px !important;
+                object-fit: cover !important;
+            }
+            
+            .product-card h5 {
+                font-size: 16px !important;
+            }
+            
+            .product-card .price {
+                font-size: 18px !important;
+            }
+            
+            .col-md-3, .col-md-4, .col-md-6 {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+            }
+            
+            .form-control {
+                font-size: 14px !important;
+                padding: 12px 15px !important;
+            }
+            
+            .form-label {
+                font-size: 12px !important;
+            }
+            
+            .cart-item {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            
+            .cart-item img {
+                width: 100% !important;
+                max-width: 200px !important;
+                margin: 0 auto 15px !important;
+            }
+            
+            .checkout-summary {
+                position: static !important;
+                margin-top: 30px !important;
+            }
+            
+            .payment-option {
+                padding: 15px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .payment-option-icon {
+                width: 40px !important;
+                height: 40px !important;
+                font-size: 18px !important;
+            }
+            
+            footer {
+                padding: 30px 15px !important;
+            }
+            
+            footer h5 {
+                font-size: 16px !important;
+            }
+            
+            .product-detail-image {
+                height: 350px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            .product-detail h1 {
+                font-size: 24px !important;
+            }
+            
+            .table {
+                font-size: 13px !important;
+            }
+            
+            .table th, .table td {
+                padding: 8px 5px !important;
+            }
+            
+            /* Disable custom cursor on mobile */
+            .cursor-dot,
+            .cursor-outline {
+                display: none !important;
+            }
+        }
+        
+        /* Small Devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .hero-section h1 {
+                font-size: 40px !important;
+            }
+            
+            .product-card img {
+                height: 280px !important;
+            }
+        }
+        
+        /* Medium Devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .hero-section {
+                height: 70vh !important;
+            }
+            
+            .hero-section h1 {
+                font-size: 48px !important;
+            }
+        }
+        
+        /* Touch device improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .btn,
+            .nav-link,
+            a {
+                min-height: 44px !important;
+            }
+            
+            .product-card:hover {
+                transform: none !important;
+            }
+        }
+        
+        /* Images always responsive */
+        img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
+        /* Text overflow handling */
+        h1, h2, h3, h4, h5, h6, p {
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+        
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+<body>
+    
+    <!-- CUSTOM CURSOR -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+    
+    <!-- PAGE LOADER -->
+    <div class="page-loader">
+        <div class="loader-logo">URBANTHREADS</div>
+        <div class="loader-bar"></div>
+    </div>
+    
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg luxury-navbar" id="luxuryNavbar">
+        <div class="container">
+            <a class="luxury-brand" href="{% url 'home' %}">UrbanThreads</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    style="border-color: var(--luxury-gold);">
+                <span style="color: var(--luxury-gold);"><i class="fas fa-bars"></i></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link luxury-nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link luxury-nav-link" href="{% url 'product_list' %}">Collections</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle luxury-nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border: 1px solid var(--luxury-gold); border-radius: 0; margin-top: 15px;">
+                            <li><a class="dropdown-item luxury-nav-link" href="{% url 'product_list' %}" style="margin: 0;">All Products</a></li>
+                            <li><hr class="dropdown-divider" style="border-color: var(--luxury-gold); opacity: 0.3;"></li>
+                            <li><a class="dropdown-item luxury-nav-link" href="{% url 'product_list' %}?category=mens-clothing" style="margin: 0;">Men's Clothing</a></li>
+                            <li><a class="dropdown-item luxury-nav-link" href="{% url 'product_list' %}?category=womens-clothing" style="margin: 0;">Women's Clothing</a></li>
+                            <li><a class="dropdown-item luxury-nav-link" href="{% url 'product_list' %}?category=jackets-coats" style="margin: 0;">Jackets & Coats</a></li>
+                            <li><a class="dropdown-item luxury-nav-link" href="{% url 'product_list' %}?category=activewear" style="margin: 0;">Activewear</a></li>
+                            <li><a class="dropdown-item luxury-nav-link" href="{% url 'product_list' %}?category=accessories" style="margin: 0;">Accessories</a></li>
+                        </ul>
+                    </li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link luxury-nav-link" href="{% url 'orders' %}">Orders</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link luxury-nav-link position-relative" href="{% url 'cart' %}">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="luxury-cart-badge">{{ cart_items_count|default:0 }}</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle luxury-nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border: 1px solid var(--luxury-gold); border-radius: 0; margin-top: 15px;">
+                                <li><a class="dropdown-item luxury-nav-link" href="{% url 'logout' %}" style="margin: 0;">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link luxury-nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link luxury-nav-link" href="{% url 'register' %}">Sign Up</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- MESSAGES -->
+    {% if messages %}
+        <div class="container" style="margin-top: 100px;">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" data-aos="fade-down" 
+                     style="border-radius: 0; border-left: 4px solid var(--luxury-gold); background: rgba(0,0,0,0.95); color: var(--luxury-gold); border: 1px solid var(--luxury-gold);">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" style="filter: invert(1);"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <!-- MAIN CONTENT -->
+    <div style="padding-top: 80px;">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <!-- FOOTER -->
+    <footer class="luxury-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <h5>UrbanThreads</h5>
+                    <p style="font-size: 12px; line-height: 1.8; letter-spacing: 1px; opacity: 0.8;">
+                        Curating luxury fashion for the discerning individual. 
+                        Where timeless elegance meets contemporary sophistication.
+                    </p>
+                </div>
+                
+                <div class="col-md-2 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <h5>Shop</h5>
+                    <a href="{% url 'product_list' %}">New Arrivals</a>
+                    <a href="{% url 'product_list' %}">Collections</a>
+                    <a href="{% url 'product_list' %}">Sale</a>
+                    <a href="{% url 'product_list' %}">Best Sellers</a>
+                </div>
+                
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5>Customer Care</h5>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Shipping & Returns</a>
+                    <a href="#">Size Guide</a>
+                    <a href="#">FAQ</a>
+                </div>
+                
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <h5>Connect</h5>
+                    <div class="mt-3">
+                        <a href="#" class="d-inline-block me-3" style="font-size: 20px; transition: all 0.3s;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="d-inline-block me-3" style="font-size: 20px; transition: all 0.3s;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="d-inline-block" style="font-size: 20px; transition: all 0.3s;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="luxury-divider" style="margin: 80px auto 50px;"></div>
+            
+            <div class="text-center" style="font-size: 10px; letter-spacing: 3px; opacity: 0.6;">
+                <p>&copy; 2025 URBANTHREADS. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Page Loader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.page-loader').classList.add('fade-out');
+            }, 1000);
+        });
+        
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('luxuryNavbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth Scroll for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,363 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - UrbanThreads{% endblock %}
+
+{% block extra_css %}
+<style>
+    .register-container {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .register-container::before {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: moveBackground 20s linear infinite;
+    }
+    
+    @keyframes moveBackground {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(50px, 50px); }
+    }
+    
+    .register-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
+    .register-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 40px;
+        text-align: center;
+        color: white;
+    }
+    
+    .register-header i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        animation: bounceIn 1s;
+    }
+    
+    @keyframes bounceIn {
+        0% { transform: scale(0); opacity: 0; }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .register-header h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .register-body {
+        padding: 40px;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+        position: relative;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .form-control {
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 12px 15px 12px 45px;
+        font-size: 16px;
+        transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+    
+    .input-icon {
+        position: absolute;
+        left: 15px;
+        top: 42px;
+        color: #999;
+        font-size: 18px;
+    }
+    
+    .form-control:focus + .input-icon {
+        color: #667eea;
+    }
+    
+    .btn-signup {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        width: 100%;
+        margin-top: 20px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-signup:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-signup::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+    
+    .btn-signup:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .btn-signup span {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .divider {
+        text-align: center;
+        margin: 25px 0;
+        position: relative;
+    }
+    
+    .divider::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+        background: #e0e0e0;
+    }
+    
+    .divider span {
+        background: white;
+        padding: 0 15px;
+        color: #999;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+    }
+    
+    .login-link a {
+        color: #667eea;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    
+    .login-link a:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+    
+    .error-message {
+        background: #fee;
+        border: 1px solid #fcc;
+        color: #c33;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+    
+    .features {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #666;
+    }
+    
+    .feature-item i {
+        color: #667eea;
+        margin-right: 10px;
+        font-size: 18px;
+    }
+    
+    .password-strength {
+        height: 4px;
+        background: #e0e0e0;
+        border-radius: 2px;
+        margin-top: 8px;
+        overflow: hidden;
+    }
+    
+    .password-strength-bar {
+        height: 100%;
+        width: 0;
+        transition: all 0.3s;
+    }
+    
+    .strength-weak { width: 33%; background: #f56565; }
+    .strength-medium { width: 66%; background: #f6ad55; }
+    .strength-strong { width: 100%; background: #48bb78; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="register-card">
+                    <div class="register-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h2>Create Account</h2>
+                        <p class="mb-0">Join UrbanThreads today!</p>
+                    </div>
+                    
+                    <div class="register-body">
+                        <form method="POST" id="registerForm">
+                            {% csrf_token %}
+                            
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <i class="fas fa-user input-icon"></i>
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                    <div class="error-message">{{ form.username.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <i class="fas fa-envelope input-icon"></i>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="error-message">{{ form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <i class="fas fa-lock input-icon"></i>
+                                {{ form.password1 }}
+                                <div class="password-strength">
+                                    <div class="password-strength-bar" id="strengthBar"></div>
+                                </div>
+                                {% if form.password1.errors %}
+                                    <div class="error-message">{{ form.password1.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <i class="fas fa-lock input-icon"></i>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="error-message">{{ form.password2.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            {% if form.non_field_errors %}
+                                <div class="error-message">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+                            
+                            <button type="submit" class="btn-signup">
+                                <span><i class="fas fa-user-plus me-2"></i>Sign Up</span>
+                            </button>
+                            
+                            <div class="features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Free shipping on orders above ₹2000</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Easy 30 days return policy</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Exclusive member discounts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="login-link">
+                                Already have an account? 
+                                <a href="{% url 'login' %}">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Password strength indicator
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.querySelector('input[name="password1"]');
+    const strengthBar = document.getElementById('strengthBar');
+    
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^a-zA-Z\d]/.test(password)) strength++;
+            
+            strengthBar.className = 'password-strength-bar';
+            
+            if (strength <= 1) {
+                strengthBar.classList.add('strength-weak');
+            } else if (strength <= 3) {
+                strengthBar.classList.add('strength-medium');
+            } else {
+                strengthBar.classList.add('strength-strong');
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

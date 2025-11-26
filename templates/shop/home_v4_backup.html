@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}UrbanThreads - Luxury Fashion{% endblock %}
+
+{% block content %}
+
+<!-- LUXURY HERO SECTION -->
+<section style="min-height: 90vh; background: linear-gradient(135deg, #0a0a0a 0%, #2c2c2c 100%); position: relative; display: flex; align-items: center; overflow: hidden;">
+    <!-- Animated Pattern Background -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"100\" height=\"100\" fill=\"%23000000\"/><circle cx=\"50\" cy=\"50\" r=\"1\" fill=\"%23D4AF37\" opacity=\"0.1\"/></svg>'); opacity: 0.3; animation: movePattern 30s linear infinite;"></div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="row align-items-center">
+            <div class="col-lg-6 fade-in-up">
+                <p style="color: #D4AF37; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; font-weight: 300;">New Season 2025</p>
+                <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: #F5F5DC; letter-spacing: 5px; line-height: 1.2; margin-bottom: 30px; text-transform: uppercase;">
+                    Timeless<br>Elegance
+                </h1>
+                <p style="color: #F5F5DC; font-size: 14px; letter-spacing: 2px; line-height: 2; margin-bottom: 40px; opacity: 0.9; max-width: 500px;">
+                    Discover our curated collection of premium fashion. Where sophistication meets contemporary design.
+                </p>
+                <a href="{% url 'product_list' %}" class="btn-luxury">
+                    Explore Collection
+                </a>
+            </div>
+            <div class="col-lg-6 fade-in-up" style="animation-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800" alt="Luxury Fashion" 
+                     style="width: 100%; border: 1px solid #D4AF37; filter: grayscale(30%); transition: all 0.8s;"
+                     onmouseover="this.style.filter='grayscale(0%)'; this.style.transform='scale(1.02)'"
+                     onmouseout="this.style.filter='grayscale(30%)'; this.style.transform='scale(1)'">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LUXURY DIVIDER -->
+<div class="luxury-divider"></div>
+
+<!-- CATEGORIES SECTION -->
+<section class="container my-5 py-5">
+    <div class="text-center mb-5 scroll-reveal">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px;">Curated Collections</p>
+        <h2 class="luxury-heading">Discover by Category</h2>
+    </div>
+    
+    <div class="row g-4">
+        {% for category in categories %}
+        <div class="col-md-4 scroll-reveal" style="animation-delay: {{ forloop.counter|add:'0.1' }}s;">
+            <a href="{% url 'category_products' category.slug %}" style="text-decoration: none;">
+                <div class="luxury-card">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" class="luxury-card-img" alt="{{ category.name }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600" class="luxury-card-img" alt="{{ category.name }}">
+                    {% endif %}
+                    <div style="padding: 30px; text-align: center;">
+                        <h5 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase; color: #0a0a0a; margin-bottom: 15px;">
+                            {{ category.name }}
+                        </h5>
+                        <p style="color: #666; font-size: 12px; letter-spacing: 1px; line-height: 1.8;">
+                            {{ category.description|truncatewords:10 }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #999; font-size: 12px; letter-spacing: 2px;">No categories available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- LUXURY DIVIDER -->
+<div class="luxury-divider"></div>
+
+<!-- FEATURED PRODUCTS -->
+<section class="container my-5 py-5">
+    <div class="text-center mb-5 scroll-reveal">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px;">Exclusive Selection</p>
+        <h2 class="luxury-heading">Featured Collection</h2>
+    </div>
+    
+    <div class="row g-4">
+        {% for product in featured_products %}
+        <div class="col-md-3 scroll-reveal">
+            <div class="luxury-card position-relative">
+                {% if product.is_on_sale %}
+                    <span class="luxury-badge">Sale</span>
+                {% elif product.is_featured %}
+                    <span class="luxury-badge" style="background: #0a0a0a; color: #D4AF37;">Featured</span>
+                {% endif %}
+                
+                <a href="{% url 'product_detail' product.slug %}">
+                    <img src="{{ product.get_photo_url }}" class="luxury-card-img" alt="{{ product.name }}">
+                </a>
+                
+                <div style="padding: 25px; text-align: center;">
+                    <h5 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; margin-bottom: 15px; min-height: 60px;">
+                        {{ product.name }}
+                    </h5>
+                    
+                    <div style="margin-bottom: 20px;">
+                        {% if product.is_on_sale %}
+                            <span style="text-decoration: line-through; color: #999; font-size: 14px; margin-right: 10px;">₹{{ product.price }}</span>
+                            <span class="luxury-price">₹{{ product.discount_price }}</span>
+                        {% else %}
+                            <span class="luxury-price">₹{{ product.price }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <a href="{% url 'product_detail' product.slug %}" class="btn-luxury-outline">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #999; font-size: 12px; letter-spacing: 2px;">No featured products available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- LUXURY DIVIDER -->
+<div class="luxury-divider"></div>
+
+<!-- NEW ARRIVALS -->
+<section class="container my-5 py-5">
+    <div class="text-center mb-5 scroll-reveal">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px;">Just Arrived</p>
+        <h2 class="luxury-heading">New Additions</h2>
+    </div>
+    
+    <div class="row g-4">
+        {% for product in new_arrivals %}
+        <div class="col-md-3 scroll-reveal">
+            <div class="luxury-card position-relative">
+                <span class="luxury-badge" style="background: #0a0a0a; color: #D4AF37;">New</span>
+                
+                <a href="{% url 'product_detail' product.slug %}">
+                    <img src="{{ product.get_photo_url }}" class="luxury-card-img" alt="{{ product.name }}">
+                </a>
+                
+                <div style="padding: 25px; text-align: center;">
+                    <h5 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; margin-bottom: 15px; min-height: 60px;">
+                        {{ product.name }}
+                    </h5>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <span class="luxury-price">₹{{ product.final_price }}</span>
+                    </div>
+                    
+                    <a href="{% url 'product_detail' product.slug %}" class="btn-luxury-outline">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #999; font-size: 12px; letter-spacing: 2px;">No new arrivals yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- LUXURY BANNER -->
+<section style="background: linear-gradient(135deg, #0a0a0a 0%, #2c2c2c 100%); padding: 100px 0; margin-top: 100px; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"100\" height=\"100\" fill=\"%23000000\"/><circle cx=\"50\" cy=\"50\" r=\"1\" fill=\"%23D4AF37\" opacity=\"0.05\"/></svg>'); opacity: 0.5;"></div>
+    
+    <div class="container text-center" style="position: relative; z-index: 2;">
+        <p style="color: #D4AF37; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;">Exclusive Benefits</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: #F5F5DC; letter-spacing: 5px; margin-bottom: 50px; text-transform: uppercase;">
+            The UrbanThreads Experience
+        </h2>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <i class="fas fa-shipping-fast" style="font-size: 3rem; color: #D4AF37; margin-bottom: 20px;"></i>
+                <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">Complimentary Shipping</h5>
+                <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 1.8;">Free delivery on orders above ₹2000</p>
+            </div>
+            <div class="col-md-3">
+                <i class="fas fa-shield-alt" style="font-size: 3rem; color: #D4AF37; margin-bottom: 20px;"></i>
+                <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">Secure Payments</h5>
+                <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 1.8;">Protected transactions guaranteed</p>
+            </div>
+            <div class="col-md-3">
+                <i class="fas fa-undo-alt" style="font-size: 3rem; color: #D4AF37; margin-bottom: 20px;"></i>
+                <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">Easy Returns</h5>
+                <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 1.8;">30-day return policy</p>
+            </div>
+            <div class="col-md-3">
+                <i class="fas fa-headset" style="font-size: 3rem; color: #D4AF37; margin-bottom: 20px;"></i>
+                <h5 style="color: #F5F5DC; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">24/7 Support</h5>
+                <p style="color: #F5F5DC; font-size: 12px; opacity: 0.7; line-height: 1.8;">Dedicated customer service</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes movePattern {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(100px, 100px); }
+    }
+</style>
+
+{% endblock %}
