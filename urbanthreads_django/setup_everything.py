@@ -1,5 +1,5 @@
 """
-COMPLETE AUTO SETUP SCRIPT FOR URBANTHREADS
+FIXED COMPLETE AUTO SETUP SCRIPT FOR URBANTHREADS
 Run this ONE script to add everything!
 """
 
@@ -89,8 +89,7 @@ products_data = [
         'quantity': 100,
         'sizes': 'S, M, L, XL, XXL',
         'colors': 'White, Blue, Black',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Classic Business Suit',
@@ -102,8 +101,7 @@ products_data = [
         'quantity': 50,
         'sizes': 'M, L, XL',
         'colors': 'Navy, Charcoal, Black',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Casual Polo Shirt',
@@ -114,8 +112,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500',
         'quantity': 150,
         'sizes': 'S, M, L, XL',
-        'colors': 'Red, Blue, Green, White',
-        'is_on_sale': True
+        'colors': 'Red, Blue, Green, White'
     },
     {
         'name': 'Denim Jeans',
@@ -126,8 +123,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500',
         'quantity': 120,
         'sizes': '30, 32, 34, 36, 38',
-        'colors': 'Blue, Black, Grey',
-        'is_on_sale': True
+        'colors': 'Blue, Black, Grey'
     },
     {
         'name': 'Leather Belt',
@@ -138,8 +134,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1624222247344-550fb60583c2?w=500',
         'quantity': 80,
         'sizes': 'Free Size',
-        'colors': 'Brown, Black',
-        'is_on_sale': True
+        'colors': 'Brown, Black'
     },
     {
         'name': 'Cotton Chinos',
@@ -150,8 +145,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500',
         'quantity': 90,
         'sizes': '30, 32, 34, 36',
-        'colors': 'Khaki, Navy, Olive',
-        'is_on_sale': True
+        'colors': 'Khaki, Navy, Olive'
     },
     {
         'name': 'V-Neck T-Shirt',
@@ -162,8 +156,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500',
         'quantity': 200,
         'sizes': 'S, M, L, XL, XXL',
-        'colors': 'Black, White, Grey, Navy',
-        'is_on_sale': True
+        'colors': 'Black, White, Grey, Navy'
     },
     {
         'name': 'Formal Trousers',
@@ -174,8 +167,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=500',
         'quantity': 70,
         'sizes': '30, 32, 34, 36, 38',
-        'colors': 'Black, Navy, Grey',
-        'is_on_sale': True
+        'colors': 'Black, Navy, Grey'
     },
     
     # Women's Clothing (7 products)
@@ -189,8 +181,7 @@ products_data = [
         'quantity': 60,
         'sizes': 'XS, S, M, L, XL',
         'colors': 'Floral Print',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Silk Blouse',
@@ -201,8 +192,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1564257577-9a0b7f4e5f4c?w=500',
         'quantity': 80,
         'sizes': 'S, M, L, XL',
-        'colors': 'White, Cream, Pink, Blue',
-        'is_on_sale': True
+        'colors': 'White, Cream, Pink, Blue'
     },
     {
         'name': 'High-Waist Jeans',
@@ -214,8 +204,7 @@ products_data = [
         'quantity': 100,
         'sizes': '26, 28, 30, 32, 34',
         'colors': 'Blue, Black',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Maxi Skirt',
@@ -226,8 +215,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500',
         'quantity': 70,
         'sizes': 'S, M, L, XL',
-        'colors': 'Black, Navy, Burgundy',
-        'is_on_sale': True
+        'colors': 'Black, Navy, Burgundy'
     },
     {
         'name': 'Wrap Top',
@@ -238,8 +226,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1624206112918-b663801ff5d3?w=500',
         'quantity': 90,
         'sizes': 'XS, S, M, L',
-        'colors': 'Red, Blue, Green, Black',
-        'is_on_sale': True
+        'colors': 'Red, Blue, Green, Black'
     },
     {
         'name': 'Evening Gown',
@@ -251,8 +238,7 @@ products_data = [
         'quantity': 30,
         'sizes': 'S, M, L',
         'colors': 'Black, Red, Navy',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Casual T-Shirt Dress',
@@ -263,8 +249,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?w=500',
         'quantity': 120,
         'sizes': 'XS, S, M, L, XL',
-        'colors': 'White, Black, Grey, Pink',
-        'is_on_sale': True
+        'colors': 'White, Black, Grey, Pink'
     },
     
     # Jackets & Coats (6 products)
@@ -278,8 +263,7 @@ products_data = [
         'quantity': 80,
         'sizes': 'S, M, L, XL',
         'colors': 'Blue, Black',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Leather Biker Jacket',
@@ -291,8 +275,7 @@ products_data = [
         'quantity': 40,
         'sizes': 'M, L, XL',
         'colors': 'Black, Brown',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Wool Blend Overcoat',
@@ -303,8 +286,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1539533113351-892c95f0c556?w=500',
         'quantity': 50,
         'sizes': 'M, L, XL, XXL',
-        'colors': 'Charcoal, Navy, Camel',
-        'is_on_sale': True
+        'colors': 'Charcoal, Navy, Camel'
     },
     {
         'name': 'Puffer Jacket',
@@ -315,8 +297,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1544923408-75c5cef46f14?w=500',
         'quantity': 70,
         'sizes': 'S, M, L, XL',
-        'colors': 'Black, Navy, Red',
-        'is_on_sale': True
+        'colors': 'Black, Navy, Red'
     },
     {
         'name': 'Bomber Jacket',
@@ -324,11 +305,10 @@ products_data = [
         'price': 2799,
         'discount_price': 2299,
         'description': 'Classic bomber jacket with modern fit.',
-        'image_url': 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=500',
+        'image_url': 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d5d504?w=500',
         'quantity': 60,
         'sizes': 'S, M, L, XL',
-        'colors': 'Olive, Black, Navy',
-        'is_on_sale': True
+        'colors': 'Olive, Black, Navy'
     },
     {
         'name': 'Trench Coat',
@@ -339,8 +319,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500',
         'quantity': 45,
         'sizes': 'S, M, L, XL',
-        'colors': 'Beige, Black, Navy',
-        'is_on_sale': True
+        'colors': 'Beige, Black, Navy'
     },
     
     # Activewear (7 products)
@@ -354,8 +333,7 @@ products_data = [
         'quantity': 100,
         'sizes': '7, 8, 9, 10, 11',
         'colors': 'Black, White, Blue',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Sports T-Shirt',
@@ -366,8 +344,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',
         'quantity': 150,
         'sizes': 'S, M, L, XL, XXL',
-        'colors': 'Black, Grey, Blue, Red',
-        'is_on_sale': True
+        'colors': 'Black, Grey, Blue, Red'
     },
     {
         'name': 'Yoga Pants',
@@ -379,8 +356,7 @@ products_data = [
         'quantity': 120,
         'sizes': 'XS, S, M, L, XL',
         'colors': 'Black, Navy, Purple',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Sports Bra',
@@ -391,8 +367,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1556818255-3c2f03cf0451?w=500',
         'quantity': 100,
         'sizes': 'S, M, L, XL',
-        'colors': 'Black, White, Pink',
-        'is_on_sale': True
+        'colors': 'Black, White, Pink'
     },
     {
         'name': 'Gym Shorts',
@@ -403,8 +378,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500',
         'quantity': 130,
         'sizes': 'S, M, L, XL',
-        'colors': 'Black, Grey, Navy',
-        'is_on_sale': True
+        'colors': 'Black, Grey, Navy'
     },
     {
         'name': 'Training Jacket',
@@ -415,8 +389,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500',
         'quantity': 80,
         'sizes': 'S, M, L, XL',
-        'colors': 'Black, Navy, Grey',
-        'is_on_sale': True
+        'colors': 'Black, Navy, Grey'
     },
     {
         'name': 'Compression Tights',
@@ -427,8 +400,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500',
         'quantity': 90,
         'sizes': 'S, M, L, XL',
-        'colors': 'Black, Navy',
-        'is_on_sale': True
+        'colors': 'Black, Navy'
     },
     
     # Accessories (6 products)
@@ -452,8 +424,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=500',
         'quantity': 100,
         'sizes': 'Free Size',
-        'colors': 'Brown, Black',
-        'is_on_sale': True
+        'colors': 'Brown, Black'
     },
     {
         'name': 'Sunglasses',
@@ -465,8 +436,7 @@ products_data = [
         'quantity': 80,
         'sizes': 'Free Size',
         'colors': 'Black, Brown, Blue',
-        'is_featured': True,
-        'is_on_sale': True
+        'is_featured': True
     },
     {
         'name': 'Wrist Watch',
@@ -477,8 +447,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500',
         'quantity': 60,
         'sizes': 'Free Size',
-        'colors': 'Silver, Gold, Rose Gold',
-        'is_on_sale': True
+        'colors': 'Silver, Gold, Rose Gold'
     },
     {
         'name': 'Backpack',
@@ -489,8 +458,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
         'quantity': 70,
         'sizes': 'Free Size',
-        'colors': 'Black, Grey, Navy',
-        'is_on_sale': True
+        'colors': 'Black, Grey, Navy'
     },
     {
         'name': 'Scarf',
@@ -501,8 +469,7 @@ products_data = [
         'image_url': 'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500',
         'quantity': 100,
         'sizes': 'Free Size',
-        'colors': 'Black, Grey, Burgundy, Navy',
-        'is_on_sale': True
+        'colors': 'Black, Grey, Burgundy, Navy'
     },
 ]
 
@@ -512,20 +479,22 @@ existing_count = 0
 for prod_data in products_data:
     category = categories[prod_data['category']]
     
+    # Remove is_on_sale from defaults (it's a property, not a field)
+    defaults = {
+        'category': category,
+        'price': prod_data['price'],
+        'discount_price': prod_data.get('discount_price'),
+        'description': prod_data['description'],
+        'image_url': prod_data['image_url'],
+        'quantity': prod_data['quantity'],
+        'sizes': prod_data['sizes'],
+        'colors': prod_data['colors'],
+        'is_featured': prod_data.get('is_featured', False)
+    }
+    
     product, created = Product.objects.get_or_create(
         name=prod_data['name'],
-        defaults={
-            'category': category,
-            'price': prod_data['price'],
-            'discount_price': prod_data.get('discount_price', prod_data['price']),
-            'description': prod_data['description'],
-            'image_url': prod_data['image_url'],
-            'quantity': prod_data['quantity'],
-            'sizes': prod_data['sizes'],
-            'colors': prod_data['colors'],
-            'is_featured': prod_data.get('is_featured', False),
-            'is_on_sale': prod_data.get('is_on_sale', False)
-        }
+        defaults=defaults
     )
     
     if created:
